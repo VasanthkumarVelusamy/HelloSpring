@@ -2,9 +2,11 @@ package com.vasanth.hellospring;
 
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.ResourceAccessException;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.MissingResourceException;
 
 @RestController
 @RequestMapping("/tasks")
@@ -37,9 +39,20 @@ public class TasksController {
     }
 
     @PostMapping
-    public ArrayList<Task> createTask(@Validated @RequestBody Task task) {
+    public ArrayList<Task> createTask(@RequestBody Task task) {
         tasks.add(task);
         return tasks;
+    }
+
+    @PutMapping("{id}")
+    public ArrayList<Task> replaceTask(@RequestBody Task task, @PathVariable int id) throws MissingResourceException {
+        if (id < (tasks.size())) {
+            tasks.remove(id);
+            tasks.add(id, task);
+            return tasks;
+        } else {
+            throw new MissingResourceException("sdfd", "sdfs", "sdfsd");
+        }
     }
 
 }
