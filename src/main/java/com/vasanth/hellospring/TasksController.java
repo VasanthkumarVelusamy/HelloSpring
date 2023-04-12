@@ -64,4 +64,10 @@ public class TasksController {
         return tasks;
     }
 
+    @DeleteMapping("{id}")
+    public ArrayList<Task> deleteTask(@PathVariable int id) {
+        tasks.remove(id);
+        return tasks;
+    }
+
 }
