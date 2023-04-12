@@ -1,5 +1,6 @@
 package com.vasanth.hellospring;
 
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -29,9 +30,16 @@ public class TasksController {
         return tasks;
     }
 
-    @GetMapping("{id}")
-    public Task getTask(@PathVariable("id") Integer id) {
-        return tasks.get(id);
+    // PathVariable mapping directlty to the parameter name.
+    @GetMapping("{now}")
+    public Task getTask(@PathVariable Integer now) {
+        return tasks.get(now);
+    }
+
+    @PostMapping
+    public ArrayList<Task> createTask(@Validated @RequestBody Task task) {
+        tasks.add(task);
+        return tasks;
     }
 
 }
