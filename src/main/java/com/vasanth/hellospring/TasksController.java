@@ -1,9 +1,12 @@
 package com.vasanth.hellospring;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.ResourceAccessException;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.MissingResourceException;
@@ -53,6 +56,12 @@ public class TasksController {
         } else {
             throw new MissingResourceException("sdfd", "sdfs", "sdfsd");
         }
+    }
+
+    @PatchMapping("{id}")
+    public ArrayList<Task> updateTask(@PathVariable int id, @RequestBody Task task) {
+        // TODO:- Only update the data from tasks at the given id tasks arrayList.
+        return tasks;
     }
 
 }
