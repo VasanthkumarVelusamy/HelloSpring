@@ -1,8 +1,6 @@
 package com.vasanth.hellospring;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -29,6 +27,11 @@ public class TasksController {
     @GetMapping
     public ArrayList<Task> getTasks() {
         return tasks;
+    }
+
+    @GetMapping("{id}")
+    public Task getTask(@PathVariable("id") Integer id) {
+        return tasks.get(id);
     }
 
 }
